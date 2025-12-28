@@ -4,6 +4,7 @@ import path from "path";
 
 // Vite config - using port 8080 because 5173 was conflicting with another project
 export default defineConfig(({ mode }) => ({
+  base: "./",
   server: {
     host: "::",
     port: 8080,
@@ -13,5 +14,9 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  build: {
+    outDir: "dist",
+    sourcemap: mode === "development",
   },
 }));
