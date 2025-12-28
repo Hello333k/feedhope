@@ -1,0 +1,393 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 220 30% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 12%;
+
+    --primary: 348 83% 47%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 70% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 15% 45%;
+
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 348 83% 47%;
+
+    --radius: 1rem;
+
+    /* Nepali themed gradient tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(348 83% 47%) 0%, hsl(348 90% 35%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(220 70% 45%) 0%, hsl(220 80% 35%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(25 90% 45%) 100%);
+    --gradient-nepal: linear-gradient(135deg, hsl(348 83% 47%) 0%, hsl(220 70% 45%) 50%, hsl(348 83% 47%) 100%);
+    --gradient-sunrise: linear-gradient(135deg, hsl(348 83% 47%) 0%, hsl(38 92% 50%) 50%, hsl(348 90% 55%) 100%);
+    --gradient-mountain: linear-gradient(180deg, hsl(220 70% 45%) 0%, hsl(220 50% 70%) 50%, hsl(0 0% 100%) 100%);
+    --hero-overlay: linear-gradient(180deg, hsla(348, 83%, 25%, 0.85) 0%, hsla(220, 70%, 25%, 0.7) 100%);
+    --card-shadow: 0 4px 24px hsla(348, 83%, 30%, 0.1);
+    --card-shadow-hover: 0 20px 50px hsla(348, 83%, 30%, 0.2);
+    
+    --font-display: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  .dark {
+    --background: 220 30% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 220 25% 12%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 220 25% 12%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 348 83% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 70% 55%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 20% 18%;
+    --muted-foreground: 220 15% 60%;
+
+    --accent: 38 92% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 348 83% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  /* Glassmorphism & Nepali Morphic Effects */
+  .glass {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid rgba(220, 38, 38, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(185, 28, 28, 0.1);
+  }
+
+  .dark .glass-card {
+    background: rgba(30, 30, 50, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(185, 28, 28, 0.2);
+  }
+
+  .morphic-button {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .morphic-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s;
+  }
+
+  .morphic-button:hover::before {
+    left: 100%;
+  }
+
+  .morphic-gradient {
+    background: var(--gradient-nepal);
+    background-size: 300% 300%;
+    animation: gradient-shift 6s ease infinite;
+  }
+
+  .aurora-gradient {
+    background: var(--gradient-sunrise);
+    background-size: 400% 400%;
+    animation: aurora-shift 12s ease infinite;
+  }
+
+  .nepal-gradient {
+    background: linear-gradient(135deg, 
+      hsl(348 83% 47%) 0%, 
+      hsl(348 90% 40%) 25%,
+      hsl(220 70% 45%) 75%,
+      hsl(220 80% 35%) 100%);
+    background-size: 300% 300%;
+    animation: nepal-shift 8s ease infinite;
+  }
+
+  @keyframes nepal-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes aurora-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    25% {
+      background-position: 50% 100%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    75% {
+      background-position: 50% 0%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .floating {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .pulse-ring {
+    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-ring {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(185, 28, 28, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 0 15px rgba(185, 28, 28, 0);
+    }
+  }
+
+  .glow {
+    box-shadow: 0 0 20px rgba(185, 28, 28, 0.5),
+                0 0 40px rgba(30, 64, 175, 0.3),
+                0 0 60px rgba(185, 28, 28, 0.2);
+  }
+
+  .dark .glow {
+    box-shadow: 0 0 25px rgba(220, 38, 38, 0.6),
+                0 0 50px rgba(59, 130, 246, 0.4),
+                0 0 75px rgba(220, 38, 38, 0.3);
+  }
+
+  .text-shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(348 83% 55%) 0%,
+      hsl(38 92% 55%) 25%,
+      hsl(0 0% 100%) 50%,
+      hsl(38 92% 55%) 75%,
+      hsl(348 83% 55%) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+  }
+
+  @keyframes shimmer {
+    to {
+      background-position: 200% center;
+    }
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(185, 28, 28, 0.25);
+  }
+
+  .border-gradient {
+    position: relative;
+    border: none;
+    background: linear-gradient(var(--background), var(--background)) padding-box,
+                var(--gradient-primary) border-box;
+    border: 2px solid transparent;
+  }
+
+  /* Nepali decorative patterns */
+  .nepal-pattern {
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(185, 28, 28, 0.1) 2%, transparent 2%),
+      radial-gradient(circle at 75% 75%, rgba(30, 64, 175, 0.1) 2%, transparent 2%);
+    background-size: 30px 30px;
+  }
+  
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+
+  .gradient-warm {
+    background: var(--gradient-warm);
+  }
+
+  .gradient-cool {
+    background: var(--gradient-cool);
+  }
+
+  .hero-overlay {
+    background: var(--hero-overlay);
+  }
+
+  .card-elevated {
+    box-shadow: var(--card-shadow);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .card-elevated:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-4px);
+  }
+
+  .text-gradient {
+    background: var(--warm-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-counter {
+    animation: countUp 2s ease-out forwards;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsla(25, 95%, 53%, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px hsla(25, 95%, 53%, 0.5);
+  }
+}
+
+.btn-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}

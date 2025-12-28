@@ -1,0 +1,45 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with Nepal gradient -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- Pattern overlay -->
+  <rect width="1200" height="630" fill="url(#pattern)" opacity="0.1"/>
+  
+  <!-- Main content -->
+  <g>
+    <!-- Large heart icon -->
+    <path d="M600 420C600 420 480 340 480 260C480 220 510 200 550 200C570 200 590 210 605 225C610 230 615 235 615 235C615 235 620 230 625 225C640 210 660 200 680 200C720 200 750 220 750 260C750 340 600 420 600 420Z" fill="white"/>
+    
+    <!-- Rice bowl symbol inside heart -->
+    <ellipse cx="600" cy="300" rx="35" ry="50" fill="#DC2626" opacity="0.8"/>
+    <path d="M565 290 Q600 270 635 290" stroke="white" stroke-width="3" fill="none"/>
+    <path d="M570 310 Q600 295 630 310" stroke="white" stroke-width="3" fill="none"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="600" y="480" font-family="Poppins, sans-serif" font-size="72" font-weight="700" fill="white" text-anchor="middle">
+    FeedHope Nepal
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="530" font-family="Inter, sans-serif" font-size="32" fill="white" fill-opacity="0.9" text-anchor="middle">
+    Fighting Hunger Together 🇳🇵
+  </text>
+  
+  <!-- Definitions -->
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGradient" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#DC2626"/>
+      <stop offset="25%" stop-color="#B91C1C"/>
+      <stop offset="75%" stop-color="#1E40AF"/>
+      <stop offset="100%" stop-color="#DC2626"/>
+    </linearGradient>
+    
+    <!-- Pattern -->
+    <pattern id="pattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="2" fill="white"/>
+      <circle cx="50" cy="50" r="2" fill="white"/>
+    </pattern>
+  </defs>
+</svg>
