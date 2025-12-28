@@ -41,8 +41,24 @@ export const signUpWithEmail = async (email: string, password: string, fullName:
 };
 
 export const signOut = async () => {
-  const { error } = await supabase.auth.signOut();
-  return { error };
+  try {
+    const { error } = await supabase.auth.signOut({ scope: 'local' });
+    
+    if (error) {
+      console.error("Supabase sign out error:", error);
+      return { error };
+    }
+    
+    // Ensure local storage is cleared
+    localStorage.removeItem('supabase.auth.token');
+    
+    return { error: null };
+  } catch (err) {
+    console.error("Unexpected sign out error:", err);
+    return { 
+      error: err instanceof Error ? err : new Error("Failed to sign out") 
+    };
+  }
 };
 
 // get current logged in user

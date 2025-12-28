@@ -20,22 +20,38 @@ const Navbar = () => {
   const isActiveRoute = (path: string) => location.pathname === path;
 
   const handleSignOut = async () => {
-    const { error } = await signOut();
-    
-    if (error) {
+    try {
+      const { error } = await signOut();
+      
+      if (error) {
+        console.error("Sign out error:", error);
+        toast({
+          title: "Sign out failed",
+          description: "Unable to sign out. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Close mobile menu if open
+      setIsMobileMenuOpen(false);
+      
+      // Navigate to home page first
+      navigate("/", { replace: true });
+      
+      // Show success message
+      toast({
+        title: "Signed out",
+        description: "You have been successfully signed out.",
+      });
+    } catch (err) {
+      console.error("Unexpected sign out error:", err);
       toast({
         title: "Sign out failed",
-        description: "Unable to sign out. Please try again.",
+        description: "An unexpected error occurred. Please try again.",
         variant: "destructive",
       });
-      return;
     }
-
-    toast({
-      title: "Signed out",
-      description: "You have been successfully signed out.",
-    });
-    navigate("/");
   };
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
