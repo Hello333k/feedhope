@@ -20,26 +20,34 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check auth state changes
-    // This runs whenever user logs in/out
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        // console.log('Auth event:', event); // Debug log - keeping this for now
+    try {
+      // Check auth state changes
+      // This runs whenever user logs in/out
+      const { data: { subscription } } = supabase.auth.onAuthStateChange(
+        (event, session) => {
+          // console.log('Auth event:', event); // Debug log - keeping this for now
+          setSession(session);
+          setUser(session?.user ?? null);
+          setLoading(false);
+        }
+      );
+
+      // Get current session on mount
+      // Important: This runs on page refresh to restore session
+      supabase.auth.getSession().then(({ data: { session } }) => {
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
-      }
-    );
+      }).catch((error) => {
+        console.warn('Failed to get session:', error);
+        setLoading(false);
+      });
 
-    // Get current session on mount
-    // Important: This runs on page refresh to restore session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
+      return () => subscription.unsubscribe();
+    } catch (error) {
+      console.warn('Auth initialization error:', error);
       setLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
+    }
   }, []);
 
   return (
